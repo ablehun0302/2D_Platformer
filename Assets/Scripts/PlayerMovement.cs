@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     float moveInput;
 
     Rigidbody2D rb;
+    [SerializeField] Animator animator;
 
     void Awake()
     {
@@ -32,6 +33,16 @@ public class PlayerMovement : MonoBehaviour
         // 좌우 움직임 및 속도 제한
         rb.AddForce(Vector2.right * moveForce * moveInput);
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxMoveSpeed, maxMoveSpeed), rb.velocity.y);
+
+        // 애니메이션 설정
+        bool isRunning = Mathf.Abs(rb.velocity.x) > 0.1f;
+        animator.SetBool("isRunning", isRunning);
+
+        // 방향 설정
+        if (moveInput != 0)
+        {
+            transform.localScale = new Vector3(moveInput, 1, 1);
+        }
     }
     
     /// <summary>
