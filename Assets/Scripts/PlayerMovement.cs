@@ -7,9 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce = 21;
 
     float moveInput;
+    bool isGrounded;
+    bool isRunning;
 
     Rigidbody2D rb;
     [SerializeField] Animator animator;
+    [SerializeField] Collider2D feetCollider;
 
     void Awake()
     {
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        UpdateAnimator();
         Move();
         Jump();
     }
@@ -34,10 +38,6 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector2.right * moveForce * moveInput);
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxMoveSpeed, maxMoveSpeed), rb.velocity.y);
 
-        // 애니메이션 설정
-        bool isRunning = Mathf.Abs(rb.velocity.x) > 0.1f;
-        animator.SetBool("isRunning", isRunning);
-
         // 방향 설정
         if (moveInput != 0)
         {
@@ -50,10 +50,25 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
+    /// <summary>
+    /// 애니메이션 상태를 변경
+    /// </summary>
+    void UpdateAnimator()
+    {
+        // 뛰고있는지 판별
+        isRunning = Mathf.Abs(rb.velocity.x) > 0.5f;
+        animator.SetBool("isRunning", isRunning);
+
+        // 땅에 닿았는지 판별
+        isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Terrain"));
+        animator.SetBool("isGrounded", isGrounded);
+
+        animator.SetFloat("velocityY", rb.velocity.y);
+    }
 }
