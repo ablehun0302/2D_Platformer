@@ -5,11 +5,11 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager instance;
 
-    [SerializeField] int timeLimit = 20;
+    [Header("10 = 1초")]
+    [SerializeField] int timeLimit = 200;
     [SerializeField] int life = 3;
 
     Vector2 startPosition;
-    int tenthsTicks = 9;
     bool isGameOver = false;
 
     [SerializeField] GameObject player;
@@ -47,10 +47,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PlayerReset());
     }
 
+    public void GameClear()
+    {
+        Time.timeScale = 0;
+        player.GetComponent<PlayerMovement>().enabled = false;
+        Debug.Log("Game Clear!!");
+    }
+
     void GameOver()
     {
+        Time.timeScale = 0;
         Debug.Log("GameOver");
-        isGameOver = true;
     }
 
     IEnumerator PlayerReset()
@@ -68,17 +75,12 @@ public class GameManager : MonoBehaviour
         while (!isGameOver)
         {
             yield return new WaitForSeconds(0.1f);
-            tenthsTicks -= 1;
-            
-            if (tenthsTicks < 0)
-            {
-                timeLimit -= 1;
-                tenthsTicks = 9;
-            }
+            timeLimit -= 1;
 
-            if (timeLimit * tenthsTicks < 0 )
+            if (timeLimit < 0 )
             {
                 GameOver();
+                isGameOver = true;
             }
         }
     }
