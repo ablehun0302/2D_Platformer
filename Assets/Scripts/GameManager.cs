@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject followCamera;
+    [SerializeField] InGameUI inGameUI;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         startPosition = player.transform.position;
+        inGameUI.InitLifeViewer(life);
         StartCoroutine(TimeLimitCounter());
     }
 
@@ -35,6 +37,9 @@ public class GameManager : MonoBehaviour
         life -= 1;
         player.SetActive(false);
         followCamera.SetActive(false);
+
+        // UI 적용
+        inGameUI.DecreaseLife();
 
         // 목숨이 0 이하라면 게임 오버
         if (life <= 0)
@@ -74,10 +79,12 @@ public class GameManager : MonoBehaviour
     {
         while (!isGameOver)
         {
+            inGameUI.UpdateTimeText(timeLimit);
+
             yield return new WaitForSeconds(0.1f);
             timeLimit -= 1;
 
-            if (timeLimit < 0 )
+            if (timeLimit <= 0 )
             {
                 GameOver();
                 isGameOver = true;
