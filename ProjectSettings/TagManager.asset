@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Hazard
+  - EndPoint
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 2797087501
+    locked: 0
+  - name: Player
+    uniqueID: 2916476115
     locked: 0
