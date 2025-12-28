@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject followCamera;
     [SerializeField] InGameUI inGameUI;
+    [SerializeField] PopupUI popupUI;
 
     void Awake()
     {
@@ -56,12 +57,19 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         player.GetComponent<PlayerMovement>().enabled = false;
+
+        popupUI.UpdateText(isGameOver, timeLimit);
         Debug.Log("Game Clear!!");
     }
 
     void GameOver()
     {
         Time.timeScale = 0;
+        player.GetComponent<PlayerMovement>().enabled = false;
+
+        isGameOver = true;
+
+        popupUI.UpdateText(isGameOver, timeLimit);
         Debug.Log("GameOver");
     }
 
@@ -87,7 +95,6 @@ public class GameManager : MonoBehaviour
             if (timeLimit <= 0 )
             {
                 GameOver();
-                isGameOver = true;
             }
         }
     }
