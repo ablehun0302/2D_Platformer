@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMoveSpeed: 10
   moveForce: 7
-  jumpForce: 21
+  jumpForce: 21.5
   animator: {fileID: 1658248824890423456}
   feetCollider: {fileID: 747153463195203223}
 --- !u!50 &2318858158688207510
