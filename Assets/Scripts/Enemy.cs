@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] Collider2D bottomCollider;
     [SerializeField] Collider2D frontCollider;
-    [SerializeField] CompositeCollider2D terrainCollider;
 
     void Start()
     {
