@@ -45,8 +45,9 @@ public class GameManager : MonoBehaviour
         player.SetActive(false);
         followCamera.SetActive(false);
 
-        // UI 적용
+        // UI, sfx 적용
         inGameUI.DecreaseLife();
+        SoundManager.instance.deathSound.Play();
 
         // 목숨이 0 이하라면 게임 오버
         if (life <= 0)

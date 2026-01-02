@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.getItemSound.Play();
             GameManager.instance.AddTimeLimit(extraTime);
             Destroy(gameObject);
         }

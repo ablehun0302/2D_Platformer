@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extraTime: 50
+  getSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
 --- !u!58 &4856222193268112371
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -340,6 +340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 136
   bottomCollider: {fileID: 5517814578892608967}
   frontCollider: {fileID: 3865197479284619079}
 --- !u!1 &8928336904547402393
