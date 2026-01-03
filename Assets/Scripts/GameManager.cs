@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(TimeLimitCounter());
     }
 
+    public void AddTimeLimit(int time)
+    {
+        timeLimit += time;
+        inGameUI.UpdateTimeText(timeLimit);
+    }
+
     /// <summary>
     /// 플레이어 사망 시 실행
     /// </summary>
@@ -39,8 +45,9 @@ public class GameManager : MonoBehaviour
         player.SetActive(false);
         followCamera.SetActive(false);
 
-        // UI 적용
+        // UI, sfx 적용
         inGameUI.DecreaseLife();
+        SoundManager.instance.deathSound.Play();
 
         // 목숨이 0 이하라면 게임 오버
         if (life <= 0)
@@ -68,6 +75,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = false;
 
         isGameOver = true;
+        timeLimit = 0;
 
         popupUI.UpdateText(isGameOver, timeLimit);
         Debug.Log("GameOver");

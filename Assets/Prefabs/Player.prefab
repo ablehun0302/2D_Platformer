@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4920263610512004994}
   - component: {fileID: 8428146026111598123}
   - component: {fileID: 1658248824890423456}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1378491181
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,10 +115,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1968065643319112706}
-  - component: {fileID: 3586318196838284030}
   - component: {fileID: 2307366012213750051}
   - component: {fileID: 2318858158688207510}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,21 +140,9 @@ Transform:
   - {fileID: 4920263610512004994}
   - {fileID: 7025932351697734871}
   - {fileID: 7755277290623648566}
+  - {fileID: 8303507593523470847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3586318196838284030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5427669443691883040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46b315f1c87f764aa129622db5535ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isProcessed: 0
 --- !u!114 &2307366012213750051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 10
-  moveForce: 7
-  jumpForce: 21
+  moveForce: 2000
+  jumpForce: 21.5
   animator: {fileID: 1658248824890423456}
   feetCollider: {fileID: 747153463195203223}
 --- !u!50 &2318858158688207510
@@ -210,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7755277290623648566}
   - component: {fileID: 4691437487697649659}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,6 +254,73 @@ CapsuleCollider2D:
   m_Offset: {x: -0.095840216, y: 0.5567686}
   m_Size: {x: 1.24, y: 1.44}
   m_Direction: 0
+--- !u!1 &8973771677463082327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8303507593523470847}
+  - component: {fileID: 2372185230768465889}
+  m_Layer: 6
+  m_Name: PlayerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8303507593523470847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973771677463082327}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1968065643319112706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2372185230768465889
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973771677463082327}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.095840216, y: 0.5245532}
+  m_Size: {x: 1.24, y: 1.504431}
+  m_Direction: 0
 --- !u!1 &9090606675337611859
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7025932351697734871}
   - component: {fileID: 747153463195203223}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FeetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float maxMoveSpeed = 10;
-    [SerializeField] float moveForce = 7;
+    [SerializeField] float moveForce = 50;
     [SerializeField] float jumpForce = 21;
 
     float moveInput;
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal");
 
         // 좌우 움직임 및 속도 제한
-        rb.AddForce(Vector2.right * moveForce * moveInput);
+        rb.AddForce(Vector2.right * Time.deltaTime * moveForce * moveInput);
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxMoveSpeed, maxMoveSpeed), rb.velocity.y);
 
         // 방향 설정
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            SoundManager.instance.jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
