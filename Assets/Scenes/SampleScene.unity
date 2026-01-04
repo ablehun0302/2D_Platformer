@@ -14494,6 +14494,7 @@ MonoBehaviour:
   life: 3
   player: {fileID: 592028476}
   followCamera: {fileID: 2032501476}
+  deathAnimation: {fileID: 6085335252788044970, guid: b0893208db9a2884487d76ca7b55aa4a, type: 3}
   inGameUI: {fileID: 945530105}
   popupUI: {fileID: 235828705}
 --- !u!1001 &1211723985
@@ -15602,7 +15603,7 @@ Transform:
   m_GameObject: {fileID: 2032501476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.37, y: -3.64, z: -10}
+  m_LocalPosition: {x: -5.37, y: -3.766, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15753,7 +15754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1968065643319112706, guid: 315c7d0cde3d0ad42a8554a50584ef4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.64
+      value: -3.766
       objectReference: {fileID: 0}
     - target: {fileID: 1968065643319112706, guid: 315c7d0cde3d0ad42a8554a50584ef4a, type: 3}
       propertyPath: m_LocalPosition.z

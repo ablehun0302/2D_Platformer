@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject followCamera;
+    [SerializeField] GameObject deathAnimation;
     [SerializeField] InGameUI inGameUI;
     [SerializeField] PopupUI popupUI;
 
@@ -45,8 +46,9 @@ public class GameManager : MonoBehaviour
         player.SetActive(false);
         followCamera.SetActive(false);
 
-        // UI, sfx 적용
+        // UI, fx 적용
         inGameUI.DecreaseLife();
+        Instantiate(deathAnimation, player.transform.position, Quaternion.identity);
         SoundManager.instance.deathSound.Play();
 
         // 목숨이 0 이하라면 게임 오버
