@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
     [Header("10 = 1초")]
     [SerializeField] int timeLimit = 200;
     [SerializeField] int life = 3;
+    [SerializeField] float respawnTerm = 3f;
 
     Vector2 startPosition;
-    bool isGameOver = false;
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject followCamera;
+    [SerializeField] GameObject deathAnimation;
     [SerializeField] InGameUI inGameUI;
     [SerializeField] PopupUI popupUI;
 
@@ -42,58 +43,54 @@ public class GameManager : MonoBehaviour
     {
         // 목숨 감소, 플레이어와 카메라 비활성화
         life -= 1;
-        player.SetActive(false);
-        followCamera.SetActive(false);
+        TogglePlayer(false);
 
-        // UI, sfx 적용
+        // UI, fx 적용
         inGameUI.DecreaseLife();
+        Instantiate(deathAnimation, player.transform.position, Quaternion.identity);
         SoundManager.instance.deathSound.Play();
 
         // 목숨이 0 이하라면 게임 오버
         if (life <= 0)
         {
-            GameOver();
+            FinishGame(true);
             return;
         }
 
         // 3초 후 플레이어 부활
-        StartCoroutine(PlayerReset());
+        StartCoroutine(PlayerRespawn());
     }
 
-    public void GameClear()
+    public void FinishGame(bool isGameOver)
     {
         Time.timeScale = 0;
         player.GetComponent<PlayerMovement>().enabled = false;
+
+        if (isGameOver) timeLimit = 0;
 
         popupUI.UpdateText(isGameOver, timeLimit);
         Debug.Log("Game Clear!!");
     }
 
-    void GameOver()
+    void TogglePlayer(bool state)
     {
-        Time.timeScale = 0;
-        player.GetComponent<PlayerMovement>().enabled = false;
-
-        isGameOver = true;
-        timeLimit = 0;
-
-        popupUI.UpdateText(isGameOver, timeLimit);
-        Debug.Log("GameOver");
+        player.SetActive(state);
+        followCamera.SetActive(state);
     }
 
-    IEnumerator PlayerReset()
+    IEnumerator PlayerRespawn()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(respawnTerm);
         
         // 시작지점으로 옮긴 후 플레이어, 카메라 활성화
         player.transform.position = startPosition;
-        player.SetActive(true);
-        followCamera.SetActive(true);
+        TogglePlayer(true);
     }
 
     IEnumerator TimeLimitCounter()
     {
-        while (!isGameOver)
+        bool state = true;
+        while (state)
         {
             inGameUI.UpdateTimeText(timeLimit);
 
@@ -102,7 +99,8 @@ public class GameManager : MonoBehaviour
 
             if (timeLimit <= 0 )
             {
-                GameOver();
+                FinishGame(true);
+                state = false;
             }
         }
     }

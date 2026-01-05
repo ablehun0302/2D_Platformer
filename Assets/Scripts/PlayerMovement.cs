@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 
     float moveInput;
     bool isGrounded;
-    bool isRunning;
 
     Rigidbody2D rb;
     [SerializeField] Animator animator;
@@ -24,6 +23,21 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimator();
         Move();
         Jump();
+    }
+    
+    /// <summary>
+    /// 애니메이션 상태를 변경
+    /// </summary>
+    void UpdateAnimator()
+    {
+        // 뛰고있는지 판별;
+        animator.SetBool("isRunning", Mathf.Abs(rb.velocity.x) > 0.5f);
+
+        // 땅에 닿았는지 판별
+        isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Terrain"));
+        animator.SetBool("isGrounded", isGrounded);
+
+        animator.SetFloat("velocityY", rb.velocity.y);
     }
 
     /// <summary>
@@ -57,19 +71,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 애니메이션 상태를 변경
-    /// </summary>
-    void UpdateAnimator()
-    {
-        // 뛰고있는지 판별
-        isRunning = Mathf.Abs(rb.velocity.x) > 0.5f;
-        animator.SetBool("isRunning", isRunning);
-
-        // 땅에 닿았는지 판별
-        isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Terrain"));
-        animator.SetBool("isGrounded", isGrounded);
-
-        animator.SetFloat("velocityY", rb.velocity.y);
-    }
 }
